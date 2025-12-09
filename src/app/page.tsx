@@ -9,6 +9,10 @@ import ProjectsSection from '@/components/ProjectsSection';
 import SkillsSection from '@/components/SkillsSection';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
+import SmoothScroll from '@/components/SmoothScroll';
+import Preloader from '@/components/Preloader';
+import BackToTop from '@/components/BackToTop';
+import { LanguageProvider } from '@/components/LanguageSwitcher';
 
 export default function Home() {
   const pathname = usePathname();
@@ -36,16 +40,22 @@ export default function Home() {
   }, [pathname]);
 
   return (
-    <>
-      <CustomCursor />
-      <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <SkillsSection />
-      </main>
-      <Footer />
-    </>
+    <LanguageProvider>
+      <SmoothScroll>
+        <Preloader />
+        <CustomCursor />
+        <Navbar />
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <ProjectsSection />
+          <SkillsSection />
+        </main>
+        <Footer />
+        <BackToTop />
+      </SmoothScroll>
+    </LanguageProvider>
   );
 }
+
+

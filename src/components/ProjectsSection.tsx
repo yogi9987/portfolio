@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { useLanguage } from './LanguageSwitcher';
 
 const projects = [
     {
@@ -45,6 +46,7 @@ const projects = [
 export default function ProjectsSection() {
     const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
     const [hoveredId, setHoveredId] = useState<number | null>(null);
+    const { t } = useLanguage();
 
     return (
         <section className="projects section" id="projects">
@@ -57,8 +59,8 @@ export default function ProjectsSection() {
                     viewport={{ once: true }}
                 >
                     <div>
-                        <span className="section-label">Pengalaman & Proyek</span>
-                        <h2 className="section-title">Selected Work</h2>
+                        <span className="section-label">{t('projects.label')}</span>
+                        <h2 className="section-title">{t('projects.title')}</h2>
                     </div>
                     <p className="projects-count">
                         {String(projects.length).padStart(2, '0')} Projects

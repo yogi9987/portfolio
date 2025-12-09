@@ -63,7 +63,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
   /* Hide scrollbar */
   scrollbar-width: none; /* Firefox */
@@ -538,17 +537,37 @@ button {
   aspect-ratio: 4/5;
   overflow: hidden;
   border-radius: 16px;
+  position: relative;
+}
+
+.about-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-dark);
+  z-index: 2;
+  transform: scaleY(1);
+  transform-origin: top;
+  animation: image-reveal 1s 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes image-reveal {
+  to {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
 }
 
 .about-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all var(--transition-slow);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1.1);
 }
 
 .about-image:hover img {
-  transform: scale(1.05);
+  transform: scale(1.15);
 }
 
 .about-image-overlay {
@@ -1347,8 +1366,9 @@ a, button, .project-card, .skill-logo-item, .project-folder {
 
 .project-folder:hover {
   border-color: var(--folder-color, var(--color-accent));
-  transform: translateX(8px);
-  box-shadow: -8px 8px 0 var(--folder-color, var(--color-accent));
+  transform: translateX(8px) scale(1.02);
+  box-shadow: -8px 8px 0 var(--folder-color, var(--color-accent)),
+              0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .folder-tab {
@@ -1644,10 +1664,31 @@ a, button, .project-card, .skill-logo-item, .project-folder {
   font-size: var(--font-sm);
   color: var(--color-light);
   transition: color var(--transition-fast);
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+}
+
+.footer-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-base);
 }
 
 .footer-nav a:hover {
   color: var(--color-accent);
+}
+
+.footer-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .footer-bottom {
@@ -1744,5 +1785,206 @@ a, button, .project-card, .skill-logo-item, .project-folder {
   
   .hero-decoration {
     display: none;
+  }
+}
+
+/* ===== Preloader ===== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.preloader-logo {
+  font-size: var(--font-4xl);
+  font-weight: 800;
+  color: var(--color-light);
+  letter-spacing: -0.05em;
+}
+
+.preloader-progress {
+  width: 200px;
+  height: 2px;
+  background: var(--color-dark-tertiary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.preloader-bar {
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+}
+
+.preloader-counter {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== Magnetic Button Wrapper ===== */
+.magnetic-wrapper {
+  display: inline-block;
+}
+
+/* ===== Grain Texture Overlay ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ===== Gradient Blob Background ===== */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232, 69, 69, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: blob-float 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(74, 32, 64, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: blob-float 10s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes blob-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* ===== Stagger Animation Utilities ===== */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.stagger-item.animate {
+  animation: stagger-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes stagger-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Back to Top Button ===== */
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 50%;
+  color: var(--color-light);
+  cursor: none;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(232, 69, 69, 0.4);
+  transition: box-shadow var(--transition-base);
+}
+
+.back-to-top:hover {
+  box-shadow: 0 8px 30px rgba(232, 69, 69, 0.6);
+}
+
+/* ===== Language Switcher ===== */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.lang-btn:hover {
+  color: var(--color-light);
+}
+
+.lang-btn.active {
+  color: var(--color-accent);
+}
+
+.lang-divider {
+  color: var(--color-muted);
+  font-size: var(--font-xs);
+}
+
+@media (max-width: 480px) {
+  .back-to-top {
+    bottom: var(--space-md);
+    right: var(--space-md);
+    width: 48px;
+    height: 48px;
+  }
+  
+  .language-switcher {
+    padding: 6px 10px;
   }
 }

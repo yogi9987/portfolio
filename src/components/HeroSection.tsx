@@ -3,6 +3,8 @@
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import MagneticButton from './MagneticButton';
+import { useLanguage } from './LanguageSwitcher';
 
 const ThreeBackground = dynamic(() => import('./ThreeBackground'), {
     ssr: false,
@@ -13,6 +15,7 @@ const roles = ['Backend Developer', 'Java Developer'];
 
 export default function HeroSection() {
     const [roleIndex, setRoleIndex] = useState(0);
+    const { t } = useLanguage();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -34,7 +37,7 @@ export default function HeroSection() {
                     >
                         <span className="hero-available">
                             <span className="hero-dot"></span>
-                            Available for work
+                            {t('hero.available')}
                         </span>
                     </motion.div>
 
@@ -54,7 +57,7 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
                     >
-                        <span className="hero-role-label">I am a</span>
+                        <span className="hero-role-label">{t('hero.role')}</span>
                         <motion.span
                             key={roleIndex}
                             className="hero-role-text"
@@ -73,7 +76,7 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        Fokus pada Java Backend Development dengan pengalaman dalam routing ESB dan komunikasi socket TCP/IP.
+                        {t('hero.description')}
                     </motion.p>
 
                     <motion.div
@@ -82,15 +85,15 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <a href="/projects" className="btn btn-primary">
-                            <span>View Projects</span>
+                        <MagneticButton href="/projects" className="btn btn-primary">
+                            <span>{t('hero.viewProjects')}</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
                                 <path d="M7 17L17 7M17 7H7M17 7V17" />
                             </svg>
-                        </a>
-                        <a href="/contact" className="btn btn-ghost">
-                            Get in Touch
-                        </a>
+                        </MagneticButton>
+                        <MagneticButton href="/contact" className="btn btn-ghost">
+                            {t('hero.contact')}
+                        </MagneticButton>
                     </motion.div>
                 </div>
 
@@ -111,15 +114,17 @@ export default function HeroSection() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 1.2 }}
             >
-                <span>Scroll to explore</span>
+                <span>{t('hero.scroll')}</span>
                 <div className="scroll-indicator-line"></div>
             </motion.div>
 
             {/* Decorative elements */}
             <div className="hero-decoration">
                 <span className="hero-year">© 2024</span>
-                <span className="hero-location">Based in Indonesia</span>
+                <span className="hero-location">{t('hero.location')}</span>
             </div>
         </section>
     );
 }
+
+

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const navLinks = [
     { name: 'Home', href: '/', sectionId: 'hero' },
@@ -150,20 +151,24 @@ export default function Navbar() {
                         GOY
                     </motion.a>
 
-                    <motion.button
-                        className="hamburger"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label="Toggle menu"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <span ref={topLineRef} className="hamburger-line"></span>
-                        <span ref={middleLineRef} className="hamburger-line"></span>
-                        <span ref={bottomLineRef} className="hamburger-line"></span>
-                    </motion.button>
+                    <div className="navbar-right">
+                        <LanguageSwitcher />
+
+                        <motion.button
+                            className="hamburger"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle menu"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5 }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <span ref={topLineRef} className="hamburger-line"></span>
+                            <span ref={middleLineRef} className="hamburger-line"></span>
+                            <span ref={bottomLineRef} className="hamburger-line"></span>
+                        </motion.button>
+                    </div>
                 </div>
             </motion.nav>
 

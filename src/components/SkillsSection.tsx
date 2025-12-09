@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useLanguage } from './LanguageSwitcher';
 
 // Skills from CV
 const skills = [
@@ -19,6 +20,8 @@ const skills = [
 ];
 
 export default function SkillsSection() {
+    const { t } = useLanguage();
+
     return (
         <section className="skills section" id="skills">
             <div className="container">
@@ -29,8 +32,8 @@ export default function SkillsSection() {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <span className="skills-label">Tech Stack</span>
-                    <h2 className="skills-title">Skills & Technologies</h2>
+                    <span className="skills-label">{t('skills.label')}</span>
+                    <h2 className="skills-title">{t('skills.title')}</h2>
                 </motion.div>
             </div>
 

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useLanguage } from './LanguageSwitcher';
 
 const certifications = [
     { name: 'Junior Web Programmer', org: 'BNSP', year: '2025' },
@@ -10,6 +11,7 @@ const certifications = [
 ];
 
 export default function AboutSection() {
+    const { t } = useLanguage();
     return (
         <section className="about section" id="about">
             <div className="container">
@@ -21,11 +23,9 @@ export default function AboutSection() {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <span className="section-label">About</span>
+                    <span className="section-label">{t('about.label')}</span>
                     <h2 className="about-headline">
-                        Saya adalah <span className="text-accent">Backend Developer</span> yang fokus
-                        membangun sistem yang <span className="text-outline">stabil</span> dan
-                        <span className="text-outline"> efisien</span>
+                        {t('about.headline')}
                     </h2>
                 </motion.div>
 
@@ -63,15 +63,15 @@ export default function AboutSection() {
                         <div className="about-stats">
                             <div className="stat-item">
                                 <span className="stat-number">2024</span>
-                                <span className="stat-label">Started Coding</span>
+                                <span className="stat-label">{t('about.started')}</span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-number">6+</span>
-                                <span className="stat-label">Months Exp</span>
+                                <span className="stat-label">{t('about.experience')}</span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-number">3</span>
-                                <span className="stat-label">Certifications</span>
+                                <span className="stat-label">{t('about.certifications')}</span>
                             </div>
                         </div>
                     </motion.div>
@@ -86,20 +86,16 @@ export default function AboutSection() {
                     >
                         <div className="about-content">
                             <p className="about-text-large">
-                                Berpengalaman dalam menangani logika sistem yang kompleks seperti
-                                <strong> routing ESB</strong> dan <strong>komunikasi socket TCP/IP</strong>.
+                                {t('about.text1')}
                             </p>
 
                             <p className="about-text">
-                                Saya adalah pekerja keras yang tekun, mampu bekerja mandiri maupun
-                                memimpin tim. Saat ini saya menempuh pendidikan di SMKS Wikrama Bogor,
-                                jurusan Pengembangan Perangkat Lunak dan Gim (PPLG) dengan fokus
-                                pada Backend Development.
+                                {t('about.text2')}
                             </p>
 
                             {/* Certifications */}
                             <div className="about-certs">
-                                <h3 className="about-certs-title">Sertifikasi</h3>
+                                <h3 className="about-certs-title">{t('about.certs')}</h3>
                                 <div className="about-certs-list">
                                     {certifications.map((cert, index) => (
                                         <motion.div
@@ -126,7 +122,7 @@ export default function AboutSection() {
                 {/* Marquee Text */}
                 <div className="about-marquee">
                     <div className="marquee-track">
-                        <span>Backend Developer</span>
+                        <span> Backend Developer</span>
                         <span>•</span>
                         <span>Java</span>
                         <span>•</span>
@@ -140,7 +136,7 @@ export default function AboutSection() {
                         <span>•</span>
                     </div>
                     <div className="marquee-track" aria-hidden="true">
-                        <span>Backend Developer</span>
+                        <span> Backend Developer</span>
                         <span>•</span>
                         <span>Java</span>
                         <span>•</span>
