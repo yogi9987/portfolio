@@ -1,6 +1,6 @@
 export default function ContactSection() {
     return (
-        <section className="contact section">
+        <section className="contact section" id="contact">
             <div className="container">
                 <span className="contact-label">Get in Touch</span>
                 <h2 className="contact-title">Let&apos;s Work Together</h2>

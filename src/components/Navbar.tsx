@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 
 const navLinks = [
-    { name: 'Home', href: '/hero' },
-    { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Skills', href: '/skills' },
+    { name: 'Home', href: '/', sectionId: 'hero' },
+    { name: 'About', href: '/about', sectionId: 'about' },
+    { name: 'Projects', href: '/projects', sectionId: 'projects' },
+    { name: 'Skills', href: '/skills', sectionId: 'skills' },
 ];
 
 export default function Navbar() {
@@ -100,8 +100,18 @@ export default function Navbar() {
         }
     }, [isOpen]);
 
-    const handleLinkClick = () => {
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string, href: string) => {
+        e.preventDefault();
         setIsOpen(false);
+
+        // Scroll to section
+        const section = document.getElementById(sectionId);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Update URL without # (clean URL)
+        window.history.pushState({}, '', href);
     };
 
     const menuVariants = {
@@ -174,7 +184,7 @@ export default function Navbar() {
                                         key={link.name}
                                         href={link.href}
                                         className="menu-link"
-                                        onClick={handleLinkClick}
+                                        onClick={(e) => handleLinkClick(e, link.sectionId, link.href)}
                                         ref={(el) => {
                                             if (el) linksRef.current[index] = el;
                                         }}

@@ -22,7 +22,7 @@ export default function HeroSection() {
     }, []);
 
     return (
-        <section className="hero">
+        <section className="hero" id="hero">
             <div className="hero-layout">
                 {/* Left side - Content */}
                 <div className="hero-content">
