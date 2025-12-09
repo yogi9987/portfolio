@@ -11,7 +11,7 @@ const certifications = [
 
 export default function AboutSection() {
     return (
-        <section className="about section" id="about">
+        <section className="about section">
             <div className="container">
                 {/* Section Header */}
                 <motion.div

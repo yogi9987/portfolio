@@ -47,7 +47,7 @@ export default function ProjectsSection() {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     return (
-        <section className="projects section" id="projects">
+        <section className="projects section">
             <div className="container">
                 <motion.div
                     className="projects-header"
