@@ -53,11 +53,11 @@ export default function Footer() {
                     <div className="footer-col">
                         <span className="footer-label">Navigation</span>
                         <nav className="footer-nav">
-                            <a href="#hero">Home</a>
-                            <a href="#about">About</a>
-                            <a href="#projects">Projects</a>
-                            <a href="#skills">Skills</a>
-                            <a href="#contact">Contact</a>
+                            <a href="/hero">Home</a>
+                            <a href="/about">About</a>
+                            <a href="/projects">Projects</a>
+                            <a href="/skills">Skills</a>
+                            <a href="/contact">Contact</a>
                         </nav>
                     </div>
 

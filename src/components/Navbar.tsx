@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 
 const navLinks = [
-    { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
+    { name: 'Home', href: '/hero' },
+    { name: 'About', href: '/about' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Skills', href: '/skills' },
 ];
 
 export default function Navbar() {
