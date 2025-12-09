@@ -1,8 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
 
 // Skills from CV
 const skills = [
@@ -20,44 +18,7 @@ const skills = [
     { name: 'SQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
 ];
 
-// Duplicate for seamless infinite scroll
-const duplicatedSkills = [...skills, ...skills];
-
 export default function SkillsSection() {
-    const trackRef = useRef<HTMLDivElement>(null);
-    const animationRef = useRef<gsap.core.Tween | null>(null);
-
-    useEffect(() => {
-        if (!trackRef.current) return;
-
-        const track = trackRef.current;
-        const totalWidth = track.scrollWidth / 2;
-
-        // GSAP infinite scroll animation
-        animationRef.current = gsap.to(track, {
-            x: -totalWidth,
-            duration: 25,
-            ease: 'none',
-            repeat: -1,
-            modifiers: {
-                x: gsap.utils.unitize((x) => parseFloat(x) % totalWidth),
-            },
-        });
-
-        // Pause on hover
-        const handleMouseEnter = () => animationRef.current?.pause();
-        const handleMouseLeave = () => animationRef.current?.play();
-
-        track.addEventListener('mouseenter', handleMouseEnter);
-        track.addEventListener('mouseleave', handleMouseLeave);
-
-        return () => {
-            animationRef.current?.kill();
-            track.removeEventListener('mouseenter', handleMouseEnter);
-            track.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, []);
-
     return (
         <section className="skills section" id="skills">
             <div className="container">
@@ -73,11 +34,26 @@ export default function SkillsSection() {
                 </motion.div>
             </div>
 
-            {/* Auto-scrolling carousel */}
+            {/* Auto-scrolling infinite carousel */}
             <div className="skills-carousel-wrapper">
-                <div className="skills-carousel-track" ref={trackRef}>
-                    {duplicatedSkills.map((skill, idx) => (
-                        <div key={`${skill.name}-${idx}`} className="skill-logo-item">
+                <div className="carousel-fade-left"></div>
+                <div className="carousel-fade-right"></div>
+
+                <div className="skills-carousel-track">
+                    {/* First set */}
+                    {skills.map((skill, idx) => (
+                        <div key={`first-${skill.name}-${idx}`} className="skill-logo-item">
+                            <img
+                                src={skill.logo}
+                                alt={skill.name}
+                                className="skill-logo-img"
+                            />
+                            <span className="skill-logo-name">{skill.name}</span>
+                        </div>
+                    ))}
+                    {/* Second set (duplicate for seamless loop) */}
+                    {skills.map((skill, idx) => (
+                        <div key={`second-${skill.name}-${idx}`} className="skill-logo-item">
                             <img
                                 src={skill.logo}
                                 alt={skill.name}
@@ -88,10 +64,7 @@ export default function SkillsSection() {
                     ))}
                 </div>
             </div>
-
-            {/* Gradient overlays for fade effect */}
-            <div className="carousel-fade-left"></div>
-            <div className="carousel-fade-right"></div>
         </section>
     );
 }
+

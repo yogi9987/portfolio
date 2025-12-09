@@ -926,6 +926,20 @@ button {
   display: flex;
   gap: var(--space-lg);
   width: max-content;
+  animation: infinite-scroll 30s linear infinite;
+}
+
+.skills-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .skill-logo-item {
