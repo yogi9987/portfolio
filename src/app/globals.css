@@ -682,6 +682,7 @@ button {
   border-top: 1px solid var(--color-dark-tertiary);
   border-bottom: 1px solid var(--color-dark-tertiary);
   padding: var(--space-md) 0;
+  display: flex;
 }
 
 .marquee-track {
@@ -689,6 +690,7 @@ button {
   gap: var(--space-lg);
   animation: marquee 20s linear infinite;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .marquee-track span {
@@ -701,7 +703,7 @@ button {
 
 @keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-100%); }
 }
 
 /* ===== Projects Section - Cards ===== */

@@ -138,6 +138,8 @@ export default function AboutSection() {
                         <span>•</span>
                         <span>Microservices</span>
                         <span>•</span>
+                    </div>
+                    <div className="marquee-track" aria-hidden="true">
                         <span>Backend Developer</span>
                         <span>•</span>
                         <span>Java</span>
