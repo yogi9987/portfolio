@@ -1458,6 +1458,13 @@ a, button, .project-card, .skill-logo-item, .project-folder {
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  /* Hide scrollbar but keep scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.project-modal::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .modal-close {
