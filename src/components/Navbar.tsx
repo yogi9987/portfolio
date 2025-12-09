@@ -131,7 +131,7 @@ export default function Navbar() {
             >
                 <div className="navbar-inner">
                     <motion.a
-                        href="#"
+                        href="/"
                         className="navbar-logo"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}

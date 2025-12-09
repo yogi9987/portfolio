@@ -82,13 +82,13 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <a href="#projects" className="btn btn-primary">
+                        <a href="/projects" className="btn btn-primary">
                             <span>View Projects</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="20" height="20">
                                 <path d="M7 17L17 7M17 7H7M17 7V17" />
                             </svg>
                         </a>
-                        <a href="#contact" className="btn btn-ghost">
+                        <a href="/contact" className="btn btn-ghost">
                             Get in Touch
                         </a>
                     </motion.div>
